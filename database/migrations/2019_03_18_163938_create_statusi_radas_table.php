@@ -13,7 +13,7 @@ class CreateStatusiRadasTable extends Migration
      */
     public function up()
     {
-        Schema::create('statusi_radas', function (Blueprint $table) {
+        Schema::create('statusi_rada', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('naziv');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateStatusiRadasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('statusi_radas');
+        Schema::dropIfExists('statusi_rada');
     }
 }

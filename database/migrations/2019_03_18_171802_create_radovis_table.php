@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePonudeneTemesTable extends Migration
+class CreateRadovisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,18 @@ class CreatePonudeneTemesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ponudene_teme', function (Blueprint $table) {
+        Schema::create('radovi', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('radovi_id');
-            $table->foreign('radovi_id')->references('id')->on('radovi');
+            
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('studenti');
 
             $table->unsignedBigInteger('djelatnik_id');
             $table->foreign('djelatnik_id')->references('id')->on('djelatnici');
+
+            $table->unsignedBigInteger('statusi_rada_id');
+            $table->foreign('statusi_rada_id')->references('id')->on('statusi_rada');
 
             $table->string('naziv_hr');
             $table->string('opis_hr');
@@ -29,6 +33,7 @@ class CreatePonudeneTemesTable extends Migration
             $table->string('naziv_tal');
             $table->string('opis_tal');
             
+
             $table->timestamps();
         });
     }
@@ -40,6 +45,6 @@ class CreatePonudeneTemesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ponudene_teme');
+        Schema::dropIfExists('radovi');
     }
 }

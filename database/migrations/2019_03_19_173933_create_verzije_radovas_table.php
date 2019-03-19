@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePonudeneTemesTable extends Migration
+class CreateVerzijeRadovasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,17 @@ class CreatePonudeneTemesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ponudene_teme', function (Blueprint $table) {
+        Schema::create('verzije_radova', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('radovi_id');
             $table->foreign('radovi_id')->references('id')->on('radovi');
 
-            $table->unsignedBigInteger('djelatnik_id');
-            $table->foreign('djelatnik_id')->references('id')->on('djelatnici');
-
-            $table->string('naziv_hr');
-            $table->string('opis_hr');
-            $table->string('naziv_eng');
-            $table->string('opis_eng');
-            $table->string('naziv_tal');
-            $table->string('opis_tal');
+            $table->string('verzija_predaog_rada');
+            $table->date('datum_predaje');
+            $table->date('datum_pregleda');
+            $table->string('opis_dorade_studenta');
+            $table->string('opis_dorade_mentora');
             
             $table->timestamps();
         });
@@ -40,6 +36,6 @@ class CreatePonudeneTemesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ponudene_teme');
+        Schema::dropIfExists('verzije_radova');
     }
 }

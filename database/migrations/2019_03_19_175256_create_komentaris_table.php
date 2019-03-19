@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePonudeneTemesTable extends Migration
+class CreateKomentarisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,17 @@ class CreatePonudeneTemesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ponudene_teme', function (Blueprint $table) {
+        Schema::create('komentari', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('radovi_id');
             $table->foreign('radovi_id')->references('id')->on('radovi');
-
-            $table->unsignedBigInteger('djelatnik_id');
-            $table->foreign('djelatnik_id')->references('id')->on('djelatnici');
-
-            $table->string('naziv_hr');
-            $table->string('opis_hr');
-            $table->string('naziv_eng');
-            $table->string('opis_eng');
-            $table->string('naziv_tal');
-            $table->string('opis_tal');
             
+            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('djelatnik_id');
+            $table->string('komentar');
+            $table->date('datum');
+
             $table->timestamps();
         });
     }
@@ -40,6 +35,6 @@ class CreatePonudeneTemesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ponudene_teme');
+        Schema::dropIfExists('komentari');
     }
 }

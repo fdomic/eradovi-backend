@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\PonudeneTeme;
+use App\Radovi;
 use Illuminate\Http\Request;
 
-class PonudeneTemeController extends Controller
+class RadoviController extends Controller
 {
     public function index()
     {
@@ -21,8 +21,9 @@ class PonudeneTemeController extends Controller
         $data = $request->all();
 
         $model = new PonudeneTeme();
-        $model->radovi_id = $data['radovi_id'];
+        $model->student_id = $data['student_id'];
         $model->djelatnik_id = $data['djelatnik_id'];
+        $model->statusi_rada = $data['statusi_rada_id'];
         $model->naziv_hr = $data['naziv_hr'];
         $model->opis_hr = $data['opis_hr'];
         $model->naziv_eng = $data['naziv_eng'];

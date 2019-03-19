@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\PonudeneTeme;
+use App\Komentari;
 use Illuminate\Http\Request;
 
-class PonudeneTemeController extends Controller
+class KomentariController extends Controller
 {
+       
     public function index()
     {
-        $data = PonudeneTeme::all();
+        $data = Komentari::all();
         return response()->json([
             'success' => true,
             'data' => $data 
@@ -20,16 +21,13 @@ class PonudeneTemeController extends Controller
     {
         $data = $request->all();
 
-        $model = new PonudeneTeme();
+        $model = new Komentari();
         $model->radovi_id = $data['radovi_id'];
+        $model->student_id = $data['student_id'];
         $model->djelatnik_id = $data['djelatnik_id'];
-        $model->naziv_hr = $data['naziv_hr'];
-        $model->opis_hr = $data['opis_hr'];
-        $model->naziv_eng = $data['naziv_eng'];
-        $model->opis_eng = $data['opis_eng'];
-        $model->naziv_tal = $data['naziv_tal'];
-        $model->opis_tal = $data['opis_tal'];
-        
+        $model->komentar = $data['komentar'];
+        $model->datum = $data['datum'];
+       
         $model->save();
 
         return response()->json([
@@ -37,6 +35,4 @@ class PonudeneTemeController extends Controller
             'data' => $model 
           ], 200);
     }
-
-
 }

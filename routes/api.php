@@ -13,9 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::resource('fakultet', 'FakultetController');
-Route::resource('odjel', 'OdjelController');
-Route::resource('odijel_djelatnik', 'Odijel_djelatnikController');
 Route::resource('dijelatnik', 'DijelatnikController');
-Route::resource('korsinik', 'korsinikController');
+Route::resource('fakultet',   'FakultetController');
+Route::resource('komentari',  'KomentariController');
+Route::resource('korsinik',   'KorsinikController');
+Route::resource('odijel_djelatnik', 'Odijel_djelatnikController');
+Route::resource('odjel', 'OdjelController');
+Route::resource('ponudene_teme', 'PonudeneTemeController');
+Route::resource('radovi', 'RadoviController');
+Route::resource('statusi_rada', 'StatusiRadaController');
 Route::resource('student', 'StudentController');
+Route::resource('verzije_radova', 'VerzijeRadovaController');

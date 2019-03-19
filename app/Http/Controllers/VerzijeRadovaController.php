@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\PonudeneTeme;
+use App\VerzijeRadova;
 use Illuminate\Http\Request;
 
-class PonudeneTemeController extends Controller
+class VerzijeRadovaController extends Controller
 {
+       
     public function index()
     {
-        $data = PonudeneTeme::all();
+        $data = VerzijeRadova::all();
         return response()->json([
             'success' => true,
             'data' => $data 
@@ -20,15 +21,14 @@ class PonudeneTemeController extends Controller
     {
         $data = $request->all();
 
-        $model = new PonudeneTeme();
+        $model = new VerzijeRadova();
         $model->radovi_id = $data['radovi_id'];
-        $model->djelatnik_id = $data['djelatnik_id'];
-        $model->naziv_hr = $data['naziv_hr'];
-        $model->opis_hr = $data['opis_hr'];
-        $model->naziv_eng = $data['naziv_eng'];
-        $model->opis_eng = $data['opis_eng'];
-        $model->naziv_tal = $data['naziv_tal'];
-        $model->opis_tal = $data['opis_tal'];
+        $model->verzija_predaog_rada = $data['verzija_predaog_rada'];
+        $model->datum_predaje = $data['datum_predaje'];
+        $model->datum_pregleda = $data['datum_pregleda'];
+        $model->opis_dorade_studenta = $data['opis_dorade_studenta'];
+        $model->opis_dorade_mentora = $data['opis_dorade_mentora'];
+
         
         $model->save();
 
@@ -37,6 +37,4 @@ class PonudeneTemeController extends Controller
             'data' => $model 
           ], 200);
     }
-
-
 }
