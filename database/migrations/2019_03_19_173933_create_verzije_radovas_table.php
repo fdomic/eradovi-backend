@@ -19,7 +19,7 @@ class CreateVerzijeRadovasTable extends Migration
             $table->unsignedBigInteger('radovi_id');
             $table->foreign('radovi_id')->references('id')->on('radovi');
 
-            $table->string('verzija_predaog_rada');
+            $table->string('verzija_predanog_rada');
             $table->date('datum_predaje');
             $table->date('datum_pregleda');
             $table->string('opis_dorade_studenta');

@@ -23,7 +23,7 @@ class VerzijeRadovaController extends Controller
 
         $model = new VerzijeRadova();
         $model->radovi_id = $data['radovi_id'];
-        $model->verzija_predaog_rada = $data['verzija_predaog_rada'];
+        $model->verzija_predanog_rada = $data['verzija_predanog_rada'];
         $model->datum_predaje = $data['datum_predaje'];
         $model->datum_pregleda = $data['datum_pregleda'];
         $model->opis_dorade_studenta = $data['opis_dorade_studenta'];

@@ -13,7 +13,7 @@ class CreateOdijelDjelatniksTable extends Migration
      */
     public function up()
     {
-        Schema::create('odijeli_djelatnika', function (Blueprint $table) {
+        Schema::create('odijel_djelatnika', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('odjel_id');
@@ -34,6 +34,6 @@ class CreateOdijelDjelatniksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('odijeli_djelatnika');
+        Schema::dropIfExists('odijel_djelatnika');
     }
 }
