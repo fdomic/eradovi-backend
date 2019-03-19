@@ -12,3 +12,10 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::resource('fakultet', 'FakultetController');
+Route::resource('odjel', 'OdjelController');
+Route::resource('odijel_djelatnik', 'Odijel_djelatnikController');
+Route::resource('dijelatnik', 'DijelatnikController');
+Route::resource('korsinik', 'korsinikController');
+Route::resource('student', 'StudentController');
