@@ -13,14 +13,14 @@ class CreateOdijelDjelatniksTable extends Migration
      */
     public function up()
     {
-        Schema::create('odijel_djelatnik', function (Blueprint $table) {
+        Schema::create('odijeli_djelatnika', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('odjel_id');
-            $table->foreign('odjel_id')->references('id')->on('odjel');
+            $table->foreign('odjel_id')->references('id')->on('odjeli');
 
             $table->unsignedBigInteger('djelatnik_id');
-            $table->foreign('djelatnik_id')->references('id')->on('djelatnik');
+            $table->foreign('djelatnik_id')->references('id')->on('djelatnici');
 
             $table->string('naziv');
             $table->timestamps();
@@ -34,6 +34,6 @@ class CreateOdijelDjelatniksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('odijel_djelatnik');
+        Schema::dropIfExists('odijeli_djelatnika');
     }
 }

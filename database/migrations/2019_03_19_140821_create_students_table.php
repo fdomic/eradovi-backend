@@ -13,10 +13,10 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('student', function (Blueprint $table) {
+        Schema::create('studenti', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('korisnik_id');
-            $table->foreign('korisnik_id')->references('id')->on('korisnik');
+            $table->foreign('korisnik_id')->references('id')->on('korisnici');
 
             $table->string('ime');
             $table->string('prezime');
@@ -35,6 +35,6 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student');
+        Schema::dropIfExists('studenti');
     }
 }

@@ -13,7 +13,7 @@ class CreateKorisniksTable extends Migration
      */
     public function up()
     {
-        Schema::create('korisnik', function (Blueprint $table) {
+        Schema::create('korisnici', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->string('korisnik');
@@ -32,6 +32,6 @@ class CreateKorisniksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('korisnik');
+        Schema::dropIfExists('korisnici');
     }
 }

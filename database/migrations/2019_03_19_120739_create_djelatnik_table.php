@@ -13,10 +13,10 @@ class CreateDjelatnikTable extends Migration
      */
     public function up()
     {
-        Schema::create('djelatnik', function (Blueprint $table) {
+        Schema::create('djelatnici', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('korisnik_id');
-            $table->foreign('korisnik_id')->references('id')->on('korisnik');
+            $table->foreign('korisnik_id')->references('id')->on('korisnici');
 
             $table->string('ime');
             $table->string('prezime');

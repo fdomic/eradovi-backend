@@ -13,7 +13,7 @@ class CreateFakultetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fakultet', function (Blueprint $table) {
+        Schema::create('fakulteti', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('naziv');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateFakultetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fakultet');
+        Schema::dropIfExists('fakulteti');
     }
 }
