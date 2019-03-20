@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Odjel;
+use App\Models\Komentar;
+use App\Models\Rad;
 use Illuminate\Http\Request;
 
-class OdjelController extends Controller
+class KomentarController extends Controller
 {
        
     public function index()
     {
-        $data = Odjel::all();
+        $data = Komentar::all();
         return response()->json([
             'success' => true,
             'data' => $data 
@@ -20,17 +21,18 @@ class OdjelController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+            
         $model = null;
 
         if(isset($data['id'])) {
             //UPDATE
-            $model = Odjel::find($data['id']);
+            $model = Komentar::find($data['id']);
             $model->fill($data);
             $model->save();
 
         } else {
             //CREATE
-            $model = new Odjel();
+            $model = new Komentar();
             $model->fill($data);
             $model->save();
             
@@ -41,5 +43,4 @@ class OdjelController extends Controller
             'data' => $model 
           ], 200);
     }
-
 }

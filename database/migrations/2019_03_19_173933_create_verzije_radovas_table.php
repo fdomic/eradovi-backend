@@ -16,8 +16,8 @@ class CreateVerzijeRadovasTable extends Migration
         Schema::create('verzije_radova', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('radovi_id');
-            $table->foreign('radovi_id')->references('id')->on('radovi');
+            $table->unsignedBigInteger('rad_id');
+            $table->foreign('rad_id')->references('id')->on('radovi');
 
             $table->string('verzija_predanog_rada');
             $table->date('datum_predaje');

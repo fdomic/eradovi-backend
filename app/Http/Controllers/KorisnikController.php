@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Korisnik;
+use App\Models\Korisnik;
 use Illuminate\Http\Request;
 
 class KorisnikController extends Controller
@@ -22,7 +22,6 @@ class KorisnikController extends Controller
         $data = $request->all();
 
         $model = new Korisnik();
-        $model->korisnik = $data['korisnik'];
         $model->email = $data['email'];
         $model->email = $data['zaporka'];
         $model->email = $data['aktivan'];

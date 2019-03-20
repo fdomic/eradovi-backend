@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Djelatnik;
+use App\Models\Korisnik;
 use Illuminate\Http\Request;
 
 
@@ -22,18 +23,30 @@ class DjelatnikController extends Controller
     {
         $data = $request->all();
 
-        $model = new Djelatnik();
-        $model->korisnik_id = $data['korisnik_id'];
-        $model->ime = $data['ime'];
-        $model->prezime = $data['prezime'];
-        $model->oib = $data['oib'];
-        $model->jmbag = $data['jmbag'];
-        
-        $model->save();
+        $model = null;
+
+        if(isset($data['id'])) {
+            //UPDATE
+            $model = Djelatnik::find($data['id']);
+            $model->fill($data);
+            $model->save();
+        } else {
+            //CREATE
+
+            $korisnik = new Korisnik();
+            $korisnik->fill($data['korisnik']);
+            $korisnik->save();
+    
+            $model = new Djelatnik();
+            $model->fill($data);
+            $model->korisnik_id = $korisnik->id;
+            $model->save();
+        }
 
         return response()->json([
             'success' => true,
             'data' => $model 
           ], 200);
     }
+
 }

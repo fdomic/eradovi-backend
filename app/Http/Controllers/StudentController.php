@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
+use App\Models\Student;
+use App\Models\Korisnik;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -20,17 +21,25 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $model = null;
 
-        $model = new Student();
-        $model->korisnik_id = $data['korisnik_id'];
-        $model->ime = $data['ime'];
-        $model->prezime = $data['prezime'];
-        $model->oib = $data['oib'];
-        $model->jmbag = $data['jmbag'];
-        
-        
-        // sve nove koje imam dodam tu
-        $model->save();
+        if(isset($data['id'])) {
+            //UPDATE
+            $model = Student::find($data['id']);
+            $model->fill($data);
+            $model->save();
+        } else {
+            //CREATE
+
+            $korisnik = new Korisnik();
+            $korisnik->fill($data['korisnik']);
+            $korisnik->save();
+    
+            $model = new Student();
+            $model->fill($data);
+            $model->korisnik_id = $korisnik->id;
+            $model->save();
+        }
 
         return response()->json([
             'success' => true,

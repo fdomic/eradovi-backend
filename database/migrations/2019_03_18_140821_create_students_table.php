@@ -20,9 +20,8 @@ class CreateStudentsTable extends Migration
 
             $table->string('ime');
             $table->string('prezime');
-            $table->binary('oib');
-            $table->binary('jmbag');
-           
+            $table->string('oib');
+            $table->string('jmbag');
             
             $table->timestamps();
         });

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Fakultet;
+use App\Models\Fakultet;
 use Illuminate\Http\Request;
 
 class FakultetController extends Controller
@@ -21,11 +21,21 @@ class FakultetController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $model = null;
 
-        $model = new Fakultet();
-        $model->naziv = $data['naziv'];
-        
-        $model->save();
+        if(isset($data['id'])) {
+            //UPDATE
+            $model = Fakultet::find($data['id']);
+            $model->fill($data);
+            $model->save();
+
+        } else {
+            //CREATE
+            $model = new Fakultet();
+            $model->fill($data);
+            $model->save();
+            
+        }
 
         return response()->json([
             'success' => true,

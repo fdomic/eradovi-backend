@@ -16,10 +16,9 @@ class CreateKorisniksTable extends Migration
         Schema::create('korisnici', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('korisnik');
             $table->string('email');
             $table->string('zaporka');
-            $table->string('aktivan');
+            $table->integer('aktivan')->default(1);
 
             $table->timestamps();
         });

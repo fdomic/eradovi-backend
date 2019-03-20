@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Odjel;
+use App\Models\OdijelDjelatnika;
 use Illuminate\Http\Request;
 
-class OdjelController extends Controller
+class OdjelDjelatnikaController extends Controller
 {
+   
        
     public function index()
     {
-        $data = Odjel::all();
+        $data = OdijelDjelatnika::all();
         return response()->json([
             'success' => true,
             'data' => $data 
@@ -24,13 +25,13 @@ class OdjelController extends Controller
 
         if(isset($data['id'])) {
             //UPDATE
-            $model = Odjel::find($data['id']);
+            $model = OdijelDjelatnika::find($data['id']);
             $model->fill($data);
             $model->save();
 
         } else {
             //CREATE
-            $model = new Odjel();
+            $model = new OdijelDjelatnika();
             $model->fill($data);
             $model->save();
             

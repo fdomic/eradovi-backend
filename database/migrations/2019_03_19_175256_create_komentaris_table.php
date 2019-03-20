@@ -16,8 +16,8 @@ class CreateKomentarisTable extends Migration
         Schema::create('komentari', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('radovi_id');
-            $table->foreign('radovi_id')->references('id')->on('radovi');
+            $table->unsignedBigInteger('rad_id');
+            $table->foreign('rad_id')->references('id')->on('radovi');
             
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('djelatnik_id');

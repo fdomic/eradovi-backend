@@ -16,8 +16,8 @@ class CreatePonudeneTemesTable extends Migration
         Schema::create('ponudene_teme', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedBigInteger('radovi_id');
-            $table->foreign('radovi_id')->references('id')->on('radovi');
+            $table->unsignedBigInteger('rad_id');
+            $table->foreign('rad_id')->references('id')->on('radovi');
 
             $table->unsignedBigInteger('djelatnik_id');
             $table->foreign('djelatnik_id')->references('id')->on('djelatnici');
