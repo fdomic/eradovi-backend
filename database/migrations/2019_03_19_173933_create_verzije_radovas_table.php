@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -19,12 +20,15 @@ class CreateVerzijeRadovasTable extends Migration
             $table->unsignedBigInteger('rad_id');
             $table->foreign('rad_id')->references('id')->on('radovi');
 
-            $table->string('verzija_predanog_rada');
-            $table->date('datum_predaje');
-            $table->date('datum_pregleda');
-            $table->string('opis_dorade_studenta');
-            $table->string('opis_dorade_mentora');
-            
+            $table->string('datoteka_ime');
+            $table->string('datoteka');
+
+            $table->integer('verzija_predanog_rada')->default(0);
+            $table->date('datum_predaje')->default(Carbon::now());
+            $table->date('datum_pregleda')->nullable();
+            $table->string('opis_dorade_studenta')->nullable();
+            $table->string('opis_dorade_mentora')->nullable();
+
             $table->timestamps();
         });
     }

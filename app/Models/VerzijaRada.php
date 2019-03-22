@@ -11,5 +11,5 @@ class VerzijaRada extends Model
     
     protected $guarded = ['id'];
 
-    protected $fillable = ['rad_id','verzija_predanog_rada','datum_predaje','datum_pregleda','opis_dorade_studenta','opis_dorade_mentora'];
+    protected $fillable = ['rad_id','verzija_predanog_rada','datum_predaje','datum_pregleda','opis_dorade_studenta','opis_dorade_mentora','datoteka_ime','datoteka'];
 }

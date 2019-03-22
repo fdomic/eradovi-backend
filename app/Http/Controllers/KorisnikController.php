@@ -23,8 +23,8 @@ class KorisnikController extends Controller
 
         $model = new Korisnik();
         $model->email = $data['email'];
-        $model->email = $data['zaporka'];
-        $model->email = $data['aktivan'];
+        $model->zaporka = $data['zaporka'];
+        $model->aktivan = $data['aktivan'];
         
         $model->save();
 
