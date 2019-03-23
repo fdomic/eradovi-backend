@@ -83,17 +83,20 @@ class VerzijaRadaController extends Controller
 
     
         $brojTrenutnihVerzija = VerzijaRada::where('rad_id', '=', $rad->id)->count();
-
+        $hostname = env("APP_URL", "");
+        
         $model = new VerzijaRada();
         $model->rad_id = $rad->id;
         $model->datoteka_ime = $imageName;
-        $model->datoteka =     $destinationPath;
+        $model->datoteka = $hostname . "/" .   $destinationPath;
         $model->verzija_predanog_rada = $brojTrenutnihVerzija + 1;
         $model->save();
+ 
+        $spremi = Rad::find($rad->id);
+        $spremi->url = $hostname . "/" .   $destinationPath;
+        $spremi->save();
 
-        $hostname = env("APP_URL", "");
-        $model->url = $hostname . "/" . $model->datoteka . "/" . $model->datoteka_ime;
-    
+       
         return response()->json([
             'success' => true,
             'data' => $model 

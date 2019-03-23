@@ -20,6 +20,9 @@ class CreateStatusVerzijasTable extends Migration
             $table->string('naziv');
             $table->timestamps();
         });
+
+       
+
     }
 
     /**

@@ -19,8 +19,8 @@ class CreateKomentarisTable extends Migration
             $table->unsignedBigInteger('rad_id');
             $table->foreign('rad_id')->references('id')->on('radovi');
             
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('djelatnik_id');
+            $table->unsignedBigInteger('student_id')->nullable();
+            $table->unsignedBigInteger('djelatnik_id')->nullable();
             $table->string('komentar');
             $table->date('datum');
 

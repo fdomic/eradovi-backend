@@ -25,5 +25,9 @@ Route::resource('ponudena-tema',    'PonudenaTemaController');
 Route::resource('verzija-rada',     'VerzijaRadaController');
 Route::resource('komentar',         'KomentarController');
 Route::resource('status-verzije',   'StatusVerzijaController');
+
+//Ucitavanje datoteke:
 Route::post    ('ucitaj/{id}',           'VerzijaRadaController@postImage');
 
+//Rezervacija rada:
+Route::resource('rezervacija/{id}',   'RezervacijaRadaController');

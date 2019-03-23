@@ -8,9 +8,9 @@ class PonudenaTema extends Model
 {
     protected $table = 'ponudene_teme';
   
-	protected $guarded = ['id'];
+	protected $guarded = ['id','rad_id'];
 	
-    protected $fillable = ['rad_id','djelatnik_id','naziv_hr','opis_hr','naziv_eng','opis_eng','naziv_tal','opis_tal'];
+    protected $fillable = ['djelatnik_id','naziv_hr','opis_hr','naziv_eng','opis_eng','naziv_tal','opis_tal'];
 
 
 }
