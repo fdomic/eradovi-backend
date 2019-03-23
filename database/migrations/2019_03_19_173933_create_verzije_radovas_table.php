@@ -23,7 +23,6 @@ class CreateVerzijeRadovasTable extends Migration
             $table->string('datoteka_ime');
             $table->string('datoteka');
             
-            
             $table->integer('verzija_predanog_rada')->default(0);
             $table->date('datum_predaje')->default(Carbon::now());
             $table->date('datum_pregleda')->nullable();

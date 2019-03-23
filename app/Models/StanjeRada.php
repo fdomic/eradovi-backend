@@ -11,5 +11,5 @@ class StanjeRada extends Model
   
     protected $guarded = ['id'];
 
-    protected $fillable = ['rad_id','statusi_rada_id','naziv'];
+    protected $fillable = ['rad_id','statusi_rada_id','datum'];
 }

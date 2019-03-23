@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\VerzijaRada;
-use App\Models\Rad;
+use App\Models\Rad;       
+use App\Models\StanjeVerzijeRada;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,9 @@ class VerzijaRadaController extends Controller
 
     public function postImage(Request $request)
     {
+
+       
+
         $id = $request->id;
         $rad = Rad::find($id);
 
@@ -91,7 +95,12 @@ class VerzijaRadaController extends Controller
         $model->datoteka = $hostname . "/" .   $destinationPath;
         $model->verzija_predanog_rada = $brojTrenutnihVerzija + 1;
         $model->save();
- 
+        
+        $stanje = new StanjeVerzijeRada();
+        $stanje->verzija_rada_id = $model['id'];
+        $stanje->status_verzije_id = $request['status_verzije_id'];
+        $stanje->save();
+
         $spremi = Rad::find($rad->id);
         $spremi->url = $hostname . "/" .   $destinationPath;
         $spremi->save();

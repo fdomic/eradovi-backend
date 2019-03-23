@@ -15,11 +15,14 @@ class CreateStatusVerzijasTable extends Migration
     {
         Schema::create('Statusi_Verzija', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('verzija_rada_id');
-            $table->foreign('verzija_rada_id')->references('id')->on('verzije_radova');
             $table->string('naziv');
             $table->timestamps();
         });
+
+        
+        DB::table('Statusi_Verzija')->insert([ 'naziv' => 'Dorada' ]);
+        DB::table('Statusi_Verzija')->insert([ 'naziv' => 'Rad nepotpun' ]);
+        
 
        
 

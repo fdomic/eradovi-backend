@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class StatusVerzija extends Model
 {
-    protected $table = 'Statusi_Verzija';
+    protected $table = 'statusi_serzija';
   
     protected $guarded = ['id'];
 
-    protected $fillable = ['verzija_rada_id','naziv'];
+    protected $fillable = ['naziv'];
 }
