@@ -23,9 +23,6 @@ class CreateRadovisTable extends Migration
             $table->unsignedBigInteger('djelatnik_id');
             $table->foreign('djelatnik_id')->references('id')->on('djelatnici');
 
-            $table->unsignedBigInteger('statusi_rada_id');
-            $table->foreign('statusi_rada_id')->references('id')->on('statusi_rada');
-
             $table->string('url')->nullable();
 
             $table->string('naziv_hr');

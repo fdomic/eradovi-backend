@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rad;
 use App\Models\StatusRada;
+use App\Models\StanjeRada;
 use App\Models\Student;
 use App\Models\Djelatnik;
 use Illuminate\Http\Request;
@@ -27,16 +28,27 @@ class RadController extends Controller
 
      if(isset($data['id'])) {
          //UPDATE
+
          $model = Rad::find($data['id']);
          $model->fill($data);
          $model->save();
 
+         $StanjeRada = new StanjeRada();
+         $StanjeRada->rad_id = $model['id'];
+         $StanjeRada->fill($data['stanje_rada']);
+         $StanjeRada->save();
      } else {
          //CREATE
+
          $model = new Rad();
          $model->fill($data);
          $model->save();
          
+         $StanjeRada = new StanjeRada();
+         $StanjeRada->rad_id = $model['id'];
+         $StanjeRada->fill($data['stanje_rada']);
+         $StanjeRada->save();
+       
      }
 
         return response()->json([

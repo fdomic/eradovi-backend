@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PonudenaTema;
 use App\Models\Rad;
+use App\Models\StanjeRada;
+
 use App\Models\Djelatnik;
 
 
@@ -44,7 +46,6 @@ class RezervacijaRadaController extends Controller
                 $radovi = new Rad();
                 $radovi->student_id = 1; // srediti id studenta
                 $radovi->djelatnik_id = $model['djelatnik_id'];
-                $radovi->statusi_rada_id = 1;
                 $radovi->naziv_hr = $model['naziv_hr'];
                 $radovi->opis_hr = $model['opis_hr'];
                 $radovi->naziv_eng = $model['naziv_eng'];
@@ -52,9 +53,16 @@ class RezervacijaRadaController extends Controller
                 $radovi->naziv_tal = $model['naziv_tal'];
                 $radovi->opis_tal = $model['opis_tal'];
                 $radovi->save();
-                
+
                 $model->rad_id = $model->id;
                 $model->save();
+
+                $StanjeRada = new StanjeRada();
+                $StanjeRada->rad_id = $model->id;
+                $StanjeRada->statusi_rada_id = 1;
+                $StanjeRada->save();
+                
+               
             }
             else{
                 return response()->json([
