@@ -20,6 +20,8 @@ class CreateStatusiRadasTable extends Migration
         });
 
         DB::table('statusi_rada')->insert([ 'naziv' => 'Rezervacija' ]);
+        DB::table('statusi_rada')->insert([ 'naziv' => 'Prihvacen' ]);
+        DB::table('statusi_rada')->insert([ 'naziv' => 'Odbijen' ]);
         DB::table('statusi_rada')->insert([ 'naziv' => 'Rad prijavljen' ]);
         DB::table('statusi_rada')->insert([ 'naziv' => 'Rad u izradi' ]);
         DB::table('statusi_rada')->insert([ 'naziv' => 'Čeka se obrana' ]);

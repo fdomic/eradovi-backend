@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StatusVerzija extends Model
 {
-    protected $table = 'statusi_serzija';
+    protected $table = 'Statusi_Verzija';
   
     protected $guarded = ['id'];
 

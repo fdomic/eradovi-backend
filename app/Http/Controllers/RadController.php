@@ -33,10 +33,6 @@ class RadController extends Controller
          $model->fill($data);
          $model->save();
 
-         $StanjeRada = new StanjeRada();
-         $StanjeRada->rad_id = $model['id'];
-         $StanjeRada->fill($data['stanje_rada']);
-         $StanjeRada->save();
      } else {
          //CREATE
 

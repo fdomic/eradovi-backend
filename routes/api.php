@@ -27,7 +27,10 @@ Route::resource('komentar',         'KomentarController');
 Route::resource('status-verzije',   'StatusVerzijaController');
 
 //Ucitavanje datoteke:
-Route::post    ('ucitaj/{id}',           'VerzijaRadaController@postImage');
+Route::post    ('ucitaj/{id}',      'VerzijaRadaController@postImage');
 
 //Rezervacija rada:
-Route::resource('rezervacija/{id}',   'RezervacijaRadaController');
+Route::resource('rezervacija/{id}',  'RezervacijaRadaController');
+
+//Odlucivanje u vezi rezervacije rada:
+Route::resource('odlucivanje/{id}',   'RezervacijaRadaOdlucivanjeController');

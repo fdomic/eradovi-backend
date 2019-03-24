@@ -54,11 +54,11 @@ class RezervacijaRadaController extends Controller
                 $radovi->opis_tal = $model['opis_tal'];
                 $radovi->save();
 
-                $model->rad_id = $model->id;
+                $model->rad_id = $radovi->id;
                 $model->save();
 
                 $StanjeRada = new StanjeRada();
-                $StanjeRada->rad_id = $model->id;
+                $StanjeRada->rad_id = $radovi->id;
                 $StanjeRada->statusi_rada_id = 1;
                 $StanjeRada->save();
                 
