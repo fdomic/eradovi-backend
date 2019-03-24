@@ -84,7 +84,6 @@ class RezervacijaRadaOdlucivanjeController extends Controller
             return response()->json([
                 'success'=>true,
                 'tema' => $stanje,
-                'tema' => $tema
             ]);
             
         }
@@ -95,7 +94,10 @@ class RezervacijaRadaOdlucivanjeController extends Controller
             $stanje->statusi_rada_id = $status;
             $stanje->save();
 
-            return $stanje;
+            return response()->json([
+                'success'=>true,
+                'tema' => $stanje,
+            ]);
 
         }
 

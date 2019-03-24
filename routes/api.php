@@ -23,8 +23,9 @@ Route::resource('statusi-rada',     'StatusRadaController');
 Route::resource('rad',              'RadController');
 Route::resource('ponudena-tema',    'PonudenaTemaController');
 Route::resource('verzija-rada',     'VerzijaRadaController');
-Route::resource('komentar',         'KomentarController');
 Route::resource('status-verzije',   'StatusVerzijaController');
+
+Route::resource('komentar/{id}',         'KomentarController');
 
 //Ucitavanje datoteke:
 Route::post    ('ucitaj/{id}',      'VerzijaRadaController@postImage');

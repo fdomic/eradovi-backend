@@ -26,18 +26,65 @@ class KomentarController extends Controller
 
         if(isset($data['id'])) {
             //UPDATE
-            $model = Komentar::find($data['id']);
-            $model->fill($data);
-            $model->save();
+            
+            if($request->student_id > null  ){
+                $model = Komentar::find($data['id']);;
+                $model->rad_id = $request->id;
+                $model->fill($data);
+                $model->save();
+
+            }
+            else{
+               
+                if( $request->djelatnik_id > null){
+                    $model = Komentar::find($data['id']);;
+                    $model->rad_id = $request->id;
+                    $model->fill($data);
+                    $model->save();
+    
+                }
+                else{
+                    return response()->json([
+                        'success'=>false,
+                        'error' => 400,
+                        'errorMsg' => 'Mora biti naznaceno tko komentira rad'
+                    ]);
+                }
+            }
+
+
+
+
 
         } else {
             //CREATE
-            $model = new Komentar();
-            $model->fill($data);
-            $model->save();
-            
-        }
 
+            if($request->student_id > null  ){
+                $model = new Komentar();
+                $model->rad_id = $request->id;
+                $model->fill($data);
+                $model->save();
+
+            }
+            else{
+               
+                if( $request->djelatnik_id > null){
+                    $model = new Komentar();
+                    $model->rad_id = $request->id;
+                    $model->fill($data);
+                    $model->save();
+    
+                }
+                else{
+                    return response()->json([
+                        'success'=>false,
+                        'error' => 400,
+                        'errorMsg' => 'Mora biti naznaceno tko komentira rad'
+                    ]);
+                }
+            }
+
+        }
         return response()->json([
             'success' => true,
             'data' => $model 
