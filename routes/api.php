@@ -25,13 +25,17 @@ Route::resource('ponudena-tema',    'PonudenaTemaController');
 Route::resource('verzija-rada',     'VerzijaRadaController');
 Route::resource('status-verzije',   'StatusVerzijaController');
 
-Route::resource('komentar/{id}',         'KomentarController');
-
 //Ucitavanje datoteke:
 Route::post    ('ucitaj/{id}',      'VerzijaRadaController@postImage');
 
 //Rezervacija rada:
-Route::resource('rezervacija/{id}',  'RezervacijaRadaController');
+Route::resource('rezervacija',      'RezervacijaRadaController');
+
+//Kronologija rada
+Route::resource('kronologija',   'KronologijaController');
 
 //Odlucivanje u vezi rezervacije rada:
-Route::resource('odlucivanje/{id}',   'RezervacijaRadaOdlucivanjeController');
+Route::post ('odlucivanje/{id}',   'RezervacijaRadaOdlucivanjeController@store');
+
+//Komentari
+Route::post ('komentar/{id}',         'KomentarController@store');

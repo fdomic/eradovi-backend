@@ -16,9 +16,11 @@ class RezervacijaRadaOdlucivanjeController extends Controller
     public function store(Request $request)
     {   
 
-        $id = $request->id;
+       
+
+      
         $status = $request->statusi_rada_id;
-        $provjera = Rad::find($id);
+        $provjera = Rad::find( $request->id);
 
             if($provjera == null){
 
@@ -57,18 +59,11 @@ class RezervacijaRadaOdlucivanjeController extends Controller
        
         if($status == 2){
 
-            $stanje = StanjeRada::find($id);
+            $stanje = StanjeRada::find($request->id);
             $stanje->statusi_rada_id = $status;
             $stanje->save();
 
-            $rad = PonudenaTema::where('rad_id', '=', $request->id)->first('id');
-    
-            $tema = PonudenaTema::find($rad->id);
-            $tema->rad_id = null;
-            $tema->save();
-
-
-           /* Pomocu geta kada vraca listu podataka
+            //Pomocu geta kada vraca listu podataka
            
            $rad = PonudenaTema::where('rad_id', '=', $request->id)->get('id');
     
@@ -79,8 +74,7 @@ class RezervacijaRadaOdlucivanjeController extends Controller
                 $tema->save();
 
             }
-          */
-
+          
             return response()->json([
                 'success'=>true,
                 'tema' => $stanje,
@@ -90,7 +84,7 @@ class RezervacijaRadaOdlucivanjeController extends Controller
 
         if($status == 3){
 
-            $stanje = StanjeRada::find($id);
+            $stanje = StanjeRada::find($request->id);
             $stanje->statusi_rada_id = $status;
             $stanje->save();
 

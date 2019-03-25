@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PonudenaTema;
 use App\Models\Rad;
 use App\Models\StanjeRada;
-
 use App\Models\Djelatnik;
-
 
 use Illuminate\Http\Request;
 
@@ -15,20 +13,16 @@ class RezervacijaRadaController extends Controller
 {
     public function index()
     {
-        
-        $data = PonudenaTema::all();
-
-            return response()->json([
+        $rad = PonudenaTema::whereNull('rad_id')->get();
+        return response()->json([
             'success' => true,
-            'data' => $data 
-            ], 200);
-
+            'data' => $rad 
+        ], 200);
+    
     }
 
-    public function store(Request $request)
+    public function show($id)
      {     
-
-          $id = $request->id;
           $model = PonudenaTema::find($id);
   
           if($model == null){
@@ -44,7 +38,7 @@ class RezervacijaRadaController extends Controller
 
             if( $model['rad_id'] == null){
                 $radovi = new Rad();
-                $radovi->student_id = 1; // srediti id studenta
+                $radovi->student_id = 1; // srediti id studenta //TODO nakon sigurnosti
                 $radovi->djelatnik_id = $model['djelatnik_id'];
                 $radovi->naziv_hr = $model['naziv_hr'];
                 $radovi->opis_hr = $model['opis_hr'];
@@ -61,8 +55,6 @@ class RezervacijaRadaController extends Controller
                 $StanjeRada->rad_id = $radovi->id;
                 $StanjeRada->statusi_rada_id = 1;
                 $StanjeRada->save();
-                
-               
             }
             else{
                 return response()->json([

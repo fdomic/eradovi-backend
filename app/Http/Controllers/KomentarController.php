@@ -20,6 +20,8 @@ class KomentarController extends Controller
 
     public function store(Request $request)
     {
+
+        
         $data = $request->all();
             
         $model = null;
@@ -52,10 +54,6 @@ class KomentarController extends Controller
                 }
             }
 
-
-
-
-
         } else {
             //CREATE
 
@@ -85,6 +83,7 @@ class KomentarController extends Controller
             }
 
         }
+
         return response()->json([
             'success' => true,
             'data' => $model 
