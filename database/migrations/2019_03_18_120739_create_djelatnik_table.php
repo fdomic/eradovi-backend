@@ -16,7 +16,7 @@ class CreateDjelatnikTable extends Migration
         Schema::create('djelatnici', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('korisnik_id');
-            $table->foreign('korisnik_id')->references('id')->on('korisnici');
+            $table->foreign('korisnik_id')->references('id')->on('users');
 
             $table->string('ime');
             $table->string('prezime');

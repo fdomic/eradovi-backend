@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use App\Models\Korisnik;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -31,13 +31,13 @@ class StudentController extends Controller
         } else {
             //CREATE
 
-            $korisnik = new Korisnik();
-            $korisnik->fill($data['korisnik']);
-            $korisnik->save();
+            $User = new User();
+            $User->fill($data['users']);
+            $User->save();
     
             $model = new Student();
             $model->fill($data);
-            $model->korisnik_id = $korisnik->id;
+            $model->korisnik_id = $User->id;
             $model->save();
         }
 
