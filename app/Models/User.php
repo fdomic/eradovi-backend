@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+use App\Models\Student;
+use App\Models\Djelatnik;
+use App\Models\OdijelDjelatnika;
+
+
+
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -28,7 +35,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+         'remember_token',
     ];
 
     /**
@@ -39,5 +46,43 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+    
+    public function getJWTCustomClaims() {
+        return [];
+    }
+    
+    public function isStudent() {
+        $korisnik = Student::where('korisnik_id', '=', $this->id )->first('id');
+        
+        if($korisnik != null){
+            return true; 
+        }
+    }
+    
+    public function isProfesor() {
+        $djelatnik = Djelatnik::where('korisnik_id', '=', $this->id)->first('id');
+        
+        $djelatnik = OdijelDjelatnika::where('djelatnik_id', '=', $this->id)->first('naziv');
+
+        if($djelatnik->naziv != "Referada"){
+            return true ; 
+        }
+    }
+    
+    public function isReferada() {
+        $djelatnik = Djelatnik::where('korisnik_id', '=', $this->id)->first('id');
+        
+        $djelatnik = OdijelDjelatnika::where('djelatnik_id', '=', $this->id)->first('naziv');
+
+        if($djelatnik->naziv == "Referada"){
+            return true ; 
+        }
+    }
+
+    
 }
 

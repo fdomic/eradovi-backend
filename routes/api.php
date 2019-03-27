@@ -13,29 +13,37 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::resource('korisnik',         'KorisnikController');
-Route::resource('dijelatnik',       'DjelatnikController');
-Route::resource('fakultet',         'FakultetController');
-Route::resource('odjel',            'OdjelController');
-Route::resource('odijel-djelatnik', 'OdjelDjelatnikaController');
-Route::resource('student',          'StudentController');
-Route::resource('statusi-rada',     'StatusRadaController');
-Route::resource('rad',              'RadController');
-Route::resource('ponudena-tema',    'PonudenaTemaController');
-Route::resource('verzija-rada',     'VerzijaRadaController');
-Route::resource('status-verzije',   'StatusVerzijaController');
+//Token
+Route::post('login', 'APILoginController@login');
 
-//Ucitavanje datoteke:
-Route::post    ('ucitaj/{id}',      'VerzijaRadaController@postImage');
+Route::group([ 'middleware' => ['jwt.auth'] ], function() {
 
-//Rezervacija rada:
-Route::resource('rezervacija',      'RezervacijaRadaController');
+    Route::resource('korisnik',         'KorisnikController');
+    Route::resource('dijelatnik',       'DjelatnikController');
+    Route::resource('fakultet',         'FakultetController');
+    Route::resource('odjel',            'OdjelController');
+    Route::resource('odijel-djelatnik', 'OdjelDjelatnikaController');
+    Route::resource('student',          'StudentController');
+    Route::resource('statusi-rada',     'StatusRadaController');
+    Route::resource('rad',              'RadController');
+    Route::resource('ponudena-tema',    'PonudenaTemaController');
+    Route::resource('verzija-rada',     'VerzijaRadaController');
+    Route::resource('status-verzije',   'StatusVerzijaController');
+    
+    //Ucitavanje datoteke:
+    Route::post    ('ucitaj/{id}',      'VerzijaRadaController@postImage');
+    
+    //Rezervacija rada:
+    Route::resource('rezervacija',      'RezervacijaRadaController');
+    
+    //Kronologija rada
+    Route::get('kronologija/{id}',   'KronologijaController@show');
+    
+    //Odlucivanje u vezi rezervacije rada:
+    Route::post ('odlucivanje/{id}',   'RezervacijaRadaOdlucivanjeController@store');
 
-//Kronologija rada
-Route::resource('kronologija',   'KronologijaController');
+    //Komentari
+    Route::post ('komentar/{id}',         'KomentarController@store');
+});
 
-//Odlucivanje u vezi rezervacije rada:
-Route::post ('odlucivanje/{id}',   'RezervacijaRadaOdlucivanjeController@store');
 
-//Komentari
-Route::post ('komentar/{id}',         'KomentarController@store');

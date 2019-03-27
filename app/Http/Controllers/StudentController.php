@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Hash;
 class StudentController extends Controller
 {
     
@@ -31,8 +31,12 @@ class StudentController extends Controller
         } else {
             //CREATE
 
-            $User = new User();
-            $User->fill($data['users']);
+            $pod = $request->get('users');
+            
+            $User = new User;
+            $User->name = $pod['name'];      
+            $User->email = $pod['email'];
+            $User->password = Hash::make($pod['password']);
             $User->save();
     
             $model = new Student();
