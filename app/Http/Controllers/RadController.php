@@ -15,25 +15,27 @@ class RadController extends Controller
     public function index()
     {
         $data = null;
-
         $podatak = null;
         $user = Auth::user();
-        
-       if($user->isStudent() == true) {
+
+        if($user->isReferada()) {
+
+            $data = Rad::all();
+
+        } 
+        elseif($user->isProfesor() == true) {
+           
+            $djelatnik = Djelatnik::where('korisnik_id', '=', $user->id)->first('id');
+            $data = Rad::where('djelatnik_id', '=', $djelatnik->id)->get();
+   
+        } 
+        elseif($user->isStudent() == true) {
+
             $korisnik = Student::where('korisnik_id', '=', $user->id )->first('id');
             $data = Rad::where('student_id', '=',$korisnik->id )->get();
             
-
-        } elseif($user->isProfesor() == true) {
-            $djelatnik = Djelatnik::where('korisnik_id', '=', $user->id)->first('id');
-            $data = Rad::where('djelatnik_id', '=', $djelatnik->id)->get();
-            
-
-        } elseif($user->isReferada()) {
-            
-            $data = Rad::all();
-            
-        } else {
+        } 
+        else {
             return bad_request_response("Error - kriva korisnička grupa");
         }
 
@@ -48,37 +50,103 @@ class RadController extends Controller
         // Referada može sve
         //Ako je greška odgovoriti s return unauthorized_response("Nema prava za akciju");
 
+        $data = $request->all();
+        $model = null;
+        $podatak = null;
+        $user = Auth::user();
 
-     $data = $request->all();
         
-	 $model = null;
 
-     if(isset($data['id'])) {
-         //UPDATE
+        if($user->isReferada() == true) {
 
-         $model = Rad::find($data['id']);
-         $model->fill($data);
-         $model->save();
-
-     } else {
-         //CREATE
-
-         $model = new Rad();
-         $model->fill($data);
-         $model->save();
-         
-         $StanjeRada = new StanjeRada();
-         $StanjeRada->rad_id = $model['id'];
-         $StanjeRada->fill($data['stanje_rada']);
-         $StanjeRada->save();
+            // Referada ona moze upisati rad za bilo kojeg profesora i studenta
+           
+            if(isset($data['id'])) {
+                //UPDATE
        
-     }
+                $model = Rad::find($data['id']);
+                $model->fill($data);
+                $model->save();
+       
+            } else {
+                //CREATE
+       
+                $model = new Rad();
+                $model->fill($data);
+                $model->save();
+                
+                $StanjeRada = new StanjeRada();
+                $StanjeRada->rad_id = $model['id'];
+                $StanjeRada->fill($data['stanje_rada']);
+                $StanjeRada->save();
+              
+            }
+       
+        } 
+        else 
+        if($user->isProfesor() == true) {
+            
+             // Profesor moze upisati rad za bilo kojeg studenta, ali samo na svoj id
 
-        return response()->json([
-            'success' => true,
-            'data' => $model 
-          ], 200);
+             $podatak = Student::where('korisnik_id', '=', $user->id )->first('id');
+        
+             if(isset($data['id'])) {
+                //UPDATE
+       
+                $model = Rad::find($data['id']);
+                $model->fill($data);
+                $model->save();
+       
+            } else {
+                //CREATE
+       
+                $model = new Rad();
+                $model->djelatnik_id = $korisnik->id;
+                $model->fill($data);
+                $model->save();
+                
+                $StanjeRada = new StanjeRada();
+                $StanjeRada->rad_id = $model['id'];
+                $StanjeRada->fill($data['stanje_rada']);
+                $StanjeRada->save();
+              
+            }
+
+        } 
+        elseif($user->isStudent() == true) {
+
+             // Student moze upisati rad za bilo kojeg profesora, ali samo na svoj id
+
+            $podatak = Student::where('korisnik_id', '=', $user->id )->first('id');
+
+            if(isset($data['id'])) {
+               //UPDATE
+      
+               $model = Rad::find($data['id']);
+               $model->fill($data);
+               $model->save();
+      
+           } else {
+               //CREATE
+      
+               $model = new Rad();
+               $model->student_id = $podatak->id;
+               $model->fill($data);
+               $model->save();
+               
+               $StanjeRada = new StanjeRada();
+               $StanjeRada->rad_id = $model['id'];
+               $StanjeRada->fill($data['stanje_rada']);
+               $StanjeRada->save();
+             
+           }
+ 
+        } 
+        else {
+            return bad_request_response("Error - kriva korisnička grupa");
+        }
+
+        return success_response($data);
+
     }
-
-
 }

@@ -54,34 +54,34 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims() {
         return [];
     }
+
+    public function isReferada() {
+        $djelatnik = Djelatnik::where('korisnik_id', '=', $this->id)->first('id');
+        
+        if($djelatnik == null) return false;
+        
+        $djelatnik = OdijelDjelatnika::where('djelatnik_id', '=', $djelatnik->id,'AND','naziv','=','Referada')->first('naziv');
+
+        return $djelatnik != null;
+    }
     
     public function isStudent() {
         $korisnik = Student::where('korisnik_id', '=', $this->id )->first('id');
-        
-        if($korisnik != null){
-            return true; 
-        }
+
+        return $korisnik != null;
     }
     
     public function isProfesor() {
         $djelatnik = Djelatnik::where('korisnik_id', '=', $this->id)->first('id');
-        
-        $djelatnik = OdijelDjelatnika::where('djelatnik_id', '=', $this->id)->first('naziv');
 
-        if($djelatnik->naziv != "Referada"){
-            return true ; 
-        }
+        if($djelatnik == null) return false;
+        
+        $djelatnik = OdijelDjelatnika::where('djelatnik_id', '=', $djelatnik->id,'AND','naziv','!=','Referada')->first('naziv');
+
+        return $djelatnik != null;
     }
     
-    public function isReferada() {
-        $djelatnik = Djelatnik::where('korisnik_id', '=', $this->id)->first('id');
-        
-        $djelatnik = OdijelDjelatnika::where('djelatnik_id', '=', $this->id)->first('naziv');
-
-        if($djelatnik->naziv == "Referada"){
-            return true ; 
-        }
-    }
+    
 
     
 }
