@@ -83,12 +83,11 @@ class RadController extends Controller
             }
        
         } 
-        else 
-        if($user->isProfesor() == true) {
+        elseif($user->isProfesor() == true) {
             
              // Profesor moze upisati rad za bilo kojeg studenta, ali samo na svoj id
 
-             $podatak = Student::where('korisnik_id', '=', $user->id )->first('id');
+             $podatak = Djelatnik::where('korisnik_id', '=', $user->id )->first('id');
         
              if(isset($data['id'])) {
                 //UPDATE
