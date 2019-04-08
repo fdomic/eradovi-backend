@@ -44,14 +44,8 @@ class PonudenaTemaController extends Controller
     public function store(Request $request)
     {
     
-    
-    }
+        
 
-
-     // Student može prijaviti samo rad za svoj id, ali može za bilo koji id profesora
-        // Profesor može dodati rad samo za svoj id, alči može za bilo kojeg studenta
-        // Referada može sve
-        //Ako je greška odgovoriti s return unauthorized_response("Nema prava za akciju");
 
         $data = $request->all();
         $model = null;
@@ -83,8 +77,7 @@ class PonudenaTemaController extends Controller
         else 
         if($user->isProfesor() == true) {
             
-             // Profesor moze upisati rad za bilo kojeg studenta, ali samo na svoj id
-            
+             // Profesor moze upisati ponudenu temu samo za sebe   
              
              $podatak = Djelatnik::where('korisnik_id', '=', $user->id )->first('id');
             
@@ -99,17 +92,12 @@ class PonudenaTemaController extends Controller
              } else {
                  //CREATE
                  $model = new PonudenaTema();
-                 $model->djelatnik_id = $korisnik->id;
+                 $model->korisnik_id = $podatak->id;
                  $model->fill($data);
                  $model->save();       
              }
  
 
-        } 
-        elseif($user->isStudent() == true) { // TO DOO
-
-             // Student moze upisati rad za bilo kojeg profesora, ali samo na svoj id
- 
         } 
         else {
             return bad_request_response("Error - kriva korisnička grupa");
@@ -117,5 +105,8 @@ class PonudenaTemaController extends Controller
 
         return success_response($data);
 
+
+    
+    }
 
 }

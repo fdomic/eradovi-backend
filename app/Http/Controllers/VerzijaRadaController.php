@@ -23,8 +23,7 @@ class VerzijaRadaController extends Controller
 
     public function postImage(Request $request)
     {
-
-       
+        
 
         $id = $request->id;
         $rad = Rad::find($id);
@@ -58,7 +57,7 @@ class VerzijaRadaController extends Controller
     // Spremanje datoteke u bazu i fold-----------------------  
             
             
-        $validator = Validator::make($request->all(), ['datoteka' => 'required|mimes:doc,docx,pdf,rtf']);
+    $validator = Validator::make($request->all(), ['datoteka' => 'required|mimes:doc,docx,pdf,rtf']);
         
         if ($validator->passes()) {
             
@@ -71,7 +70,7 @@ class VerzijaRadaController extends Controller
                 return response()->json([
                     'success'=>false,
                     'error' => 101,
-                    'errorMsg' => 'Polje za ucitanu datoteku je prezno'
+                    'errorMsg' => 'Polje za ucitanu datoteku je prazno'
                 ]);
             }
             else{
