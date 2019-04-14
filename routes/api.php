@@ -40,13 +40,14 @@ Route::group([ 'middleware' => ['jwt.auth'] ], function() {
     Route::resource('dijelatnik',       'DjelatnikController');
     Route::get('dijelatnik/{id}',   'DjelatnikController@show');
 
-    Route::resource('statusi-rada',     'StatusRadaController');
+    //Rad
     Route::resource('rad',              'RadController');
+    Route::get('rad/{id}',   'RadController@show');
+
+    //Ponudena tema
     Route::resource('ponudena-tema',    'PonudenaTemaController');
-    Route::resource('verzija-rada',     'VerzijaRadaController');
-    Route::resource('status-verzije',   'StatusVerzijaController');
- 
-    
+    Route::get('ponudena-tema/{id}',   'PonudenaTemaController@show');
+
     //Ucitavanje datoteke:
     Route::post    ('ucitaj/{id}',      'VerzijaRadaController@postImage');
     
@@ -60,7 +61,16 @@ Route::group([ 'middleware' => ['jwt.auth'] ], function() {
     Route::post ('odlucivanje/{id}',   'RezervacijaRadaOdlucivanjeController@store');
 
     //Komentari
-    Route::post ('komentar/{id}',         'KomentarController@store');
+    Route::post ('komentar/{id}',     'KomentarController@store');
+
+
+    Route::resource('statusi-rada',     'StatusRadaController');
+    Route::resource('verzija-rada',     'VerzijaRadaController');
+    Route::resource('status-verzije',   'StatusVerzijaController');
+ 
+    
+
+
 });
 
 

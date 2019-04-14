@@ -42,6 +42,16 @@ class RadController extends Controller
         return success_response($data);
     }
 
+    public function show($id)
+    {
+        $data = Rad::find($id);
+        return response()->json([
+            'success' => true,
+            'data' => $data 
+          ], 200);
+       
+    }
+
     public function store(Request $request)
     {
 
