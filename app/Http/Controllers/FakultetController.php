@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class FakultetController extends Controller
 {
-   
      
     public function index()
     {
@@ -16,6 +15,18 @@ class FakultetController extends Controller
             'success' => true,
             'data' => $data 
           ], 200);
+    }
+
+    public function show($id)
+    {
+        
+
+        $data = Fakultet::find($id);
+        return response()->json([
+            'success' => true,
+            'data' => $data 
+          ], 200);
+       
     }
 
     public function store(Request $request)

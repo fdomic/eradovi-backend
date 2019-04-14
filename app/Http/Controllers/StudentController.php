@@ -18,6 +18,17 @@ class StudentController extends Controller
           ], 200);
     }
 
+    
+    public function show($id)
+    {
+        $data = Student::find($id);
+        return response()->json([
+            'success' => true,
+            'data' => $data 
+          ], 200);
+       
+    }
+
     public function store(Request $request)
     {
         $data = $request->all();

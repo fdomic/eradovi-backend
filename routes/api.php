@@ -19,16 +19,33 @@ Route::post('login', 'APILoginController@login');
 Route::group([ 'middleware' => ['jwt.auth'] ], function() {
 
     Route::resource('korisnik',         'KorisnikController');
-    Route::resource('dijelatnik',       'DjelatnikController');
+    
+    //Fakultet
     Route::resource('fakultet',         'FakultetController');
+    Route::get('fakultet/{id}',   'FakultetController@show');
+
+    //Odjel
     Route::resource('odjel',            'OdjelController');
+    Route::get('odjel/{id}',   'OdjelController@show');
+
+    //Odjel djelatnika
     Route::resource('odijel-djelatnik', 'OdjelDjelatnikaController');
+    Route::get('odijel-djelatnik/{id}',   'OdjelDjelatnikaController@show');
+
+    //Student
     Route::resource('student',          'StudentController');
+    Route::get('student/{id}',   'StudentController@show');
+
+    //Djelatnik
+    Route::resource('dijelatnik',       'DjelatnikController');
+    Route::get('dijelatnik/{id}',   'DjelatnikController@show');
+
     Route::resource('statusi-rada',     'StatusRadaController');
     Route::resource('rad',              'RadController');
     Route::resource('ponudena-tema',    'PonudenaTemaController');
     Route::resource('verzija-rada',     'VerzijaRadaController');
     Route::resource('status-verzije',   'StatusVerzijaController');
+ 
     
     //Ucitavanje datoteke:
     Route::post    ('ucitaj/{id}',      'VerzijaRadaController@postImage');

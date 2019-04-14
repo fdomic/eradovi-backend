@@ -17,6 +17,17 @@ class DjelatnikController extends Controller
         return success_response($data);
     }
 
+    
+    public function show($id)
+    {
+        $data = Djelatnik::find($id);
+        return response()->json([
+            'success' => true,
+            'data' => $data 
+          ], 200);
+       
+    }
+
     public function store(Request $request)
     {
         $data = $request->all();
