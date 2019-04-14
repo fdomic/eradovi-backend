@@ -68,7 +68,7 @@ Route::group([ 'middleware' => ['jwt.auth'] ], function() {
     Route::resource('verzija-rada',     'VerzijaRadaController');
     Route::resource('status-verzije',   'StatusVerzijaController');
  
-    
+    Route::resource('stanje-rada',   'StanjeRadaController');
 
 
 });

@@ -16,6 +16,7 @@ class StanjeRadaController extends Controller
             'data' => $data 
           ], 200);
     }
+    
 
     public function store(Request $request)
     {
