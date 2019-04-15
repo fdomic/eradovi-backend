@@ -18,7 +18,8 @@ Route::post('login', 'APILoginController@login');
 
 Route::group([ 'middleware' => ['jwt.auth'] ], function() {
 
-    Route::resource('korisnik',         'KorisnikController');
+    Route::resource('user',         'UserController');
+    Route::get('user/{id}',         'UserController@show');
     
     //Fakultet
     Route::resource('fakultet',         'FakultetController');
