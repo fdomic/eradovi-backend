@@ -1,5 +1,0 @@
-https://stackoverflow.com/questions/2040240/php-function-to-generate-v4-uuid
-
-https://stackoverflow.com/questions/21869223/create-folder-in-laravel
-
-http://itsolutionstuff.com/post/ajax-image-upload-example-with-validation-in-php-laravel-frameworkexample.html

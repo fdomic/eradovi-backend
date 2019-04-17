@@ -12,21 +12,69 @@ class KomentarController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
         
         $data = $request->all();
-            
         $model = null;
+        $podatak = null;
+        $user = Auth::user();
 
-        if(isset($data['id'])) $model = Komentar::find($data['id']);
-        else $model = new Komentar();
 
-        $model->rad_id = $request->id;
-        $model->student_id = $user->id; //TODO zaposlenik?
-        $model->fill($data);
-        $model->save();
 
-        return success_response($model);
+        if($user->isReferada() == true) {
+
+            // Referada 
+           
+            if(isset($data['id'])) $model = Komentar::find($data['id']);
+            else $model = new Komentar();
+
+            $model->rad_id = $request->id;
+            $model->djelatnik_id = $user->id; 
+            $model->fill($data);
+            $model->save();
+
+
+        } 
+        elseif($user->isProfesor() == true) {
+             // Profesor
+
+             
+            if(isset($data['id'])) $model = Komentar::find($data['id']);
+            else $model = new Komentar();
+
+            $model->rad_id = $request->id;
+            $model->djelatnik_id = $user->id; 
+            $model->fill($data);
+            $model->save();
+
+            
+        } 
+        elseif($user->isStudent() == true) {
+             // Student 
+
+             
+            if(isset($data['id'])) $model = Komentar::find($data['id']);
+            else $model = new Komentar();
+
+            $model->rad_id = $request->id;
+            $model->student_id = $user->id; 
+            $model->fill($data);
+            $model->save();
+
+
+        } 
+        else {
+            return bad_request_response("Error - kriva korisnička grupa");
+        }
+
+        return success_response($data);
+
+
+
+
+
+
+
+
 
     }
 }
