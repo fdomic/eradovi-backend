@@ -62,13 +62,14 @@ Route::group([ 'middleware' => ['jwt.auth'] ], function() {
     Route::post ('odlucivanje/{id}',   'RezervacijaRadaOdlucivanjeController@store');
 
     //Komentari
+    Route::resource ('komentar',     'KomentarController');
+    Route::get ('komentar/{id}',     'KomentarController@show');
     Route::post ('komentar/{id}',     'KomentarController@store');
 
 
     Route::resource('statusi-rada',     'StatusRadaController');
     Route::resource('verzija-rada',     'VerzijaRadaController');
     Route::resource('status-verzije',   'StatusVerzijaController');
- 
     Route::resource('stanje-rada',   'StanjeRadaController');
 
 

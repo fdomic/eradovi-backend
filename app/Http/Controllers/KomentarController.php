@@ -9,6 +9,25 @@ use Illuminate\Http\Request;
 
 class KomentarController extends Controller
 {
+    public function index()
+    {
+        $data = Komentar::all();
+        return response()->json([
+            'success' => true,
+            'data' => $data 
+          ], 200);
+    }
+
+    
+    public function show($id)
+    {
+        $data = Komentar::find($id);
+        return response()->json([
+            'success' => true,
+            'data' => $data 
+          ], 200);
+       
+    }
 
     public function store(Request $request)
     {
