@@ -13,33 +13,37 @@ use Illuminate\Http\Request;
 |
 */
 
+
+
 //Token
 Route::post('login', 'APILoginController@login');
 
 Route::group([ 'middleware' => ['jwt.auth'] ], function() {
 
-    Route::resource('user',         'UserController');
-    Route::get('user/{id}',         'UserController@show');
     
-    //Fakultet
-    Route::resource('fakultet',         'FakultetController');
-    Route::get('fakultet/{id}',   'FakultetController@show');
+Route::resource('user',         'KorisnikController');
+Route::get('user/{id}',         'KorisnikController@show');
 
-    //Odjel
-    Route::resource('odjel',            'OdjelController');
-    Route::get('odjel/{id}',   'OdjelController@show');
+//Fakultet
+Route::resource('fakultet',         'FakultetController');
+Route::get('fakultet/{id}',   'FakultetController@show');
 
-    //Odjel djelatnika
-    Route::resource('odijel-djelatnik', 'OdjelDjelatnikaController');
-    Route::get('odijel-djelatnik/{id}',   'OdjelDjelatnikaController@show');
+//Odjel
+Route::resource('odjel',            'OdjelController');
+Route::get('odjel/{id}',   'OdjelController@show');
 
-    //Student
-    Route::resource('student',          'StudentController');
-    Route::get('student/{id}',   'StudentController@show');
+//Odjel djelatnika
+Route::resource('odijel-djelatnik', 'OdjelDjelatnikaController');
+Route::get('odijel-djelatnik/{id}',   'OdjelDjelatnikaController@show');
 
-    //Djelatnik
-    Route::resource('dijelatnik',       'DjelatnikController');
-    Route::get('dijelatnik/{id}',   'DjelatnikController@show');
+//Student
+Route::resource('student',          'StudentController');
+Route::get('student/{id}',   'StudentController@show');
+
+//Djelatnik
+Route::resource('dijelatnik',       'DjelatnikController');
+Route::get('dijelatnik/{id}',   'DjelatnikController@show');
+
 
     //Rad
     Route::resource('rad',              'RadController');

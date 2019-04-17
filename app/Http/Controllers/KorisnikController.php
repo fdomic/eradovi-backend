@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Hash;
 
-class UserController extends Controller
+class KorisnikController extends Controller
 {
     
     public function index()

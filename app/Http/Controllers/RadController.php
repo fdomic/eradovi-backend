@@ -71,6 +71,8 @@ class RadController extends Controller
 
             // Referada ona moze upisati rad za bilo kojeg profesora i studenta
            
+            
+
             if(isset($data['id'])) {
                 //UPDATE
        
@@ -81,12 +83,14 @@ class RadController extends Controller
             } else {
                 //CREATE
        
+                
                 $model = new Rad();
+                $model->djelatnik_id = $user->id;
                 $model->fill($data);
                 $model->save();
                 
                 $StanjeRada = new StanjeRada();
-                $StanjeRada->djelatnik_id = $user->id;
+               
                 $StanjeRada->rad_id = $model['id'];
                 $StanjeRada->fill($data['stanje_rada']);
                 $StanjeRada->save();
