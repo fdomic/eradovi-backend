@@ -16,9 +16,6 @@ class RezervacijaRadaOdlucivanjeController extends Controller
     public function store(Request $request)
     {   
 
-       
-
-      
         $status = $request->statusi_rada_id;
         $provjera = Rad::find( $request->id);
 
@@ -57,11 +54,14 @@ class RezervacijaRadaOdlucivanjeController extends Controller
             }
 
        
-        if($status == 2){
+        if($status == 3){ //odbijen
 
-            $stanje = StanjeRada::find($request->id);
-            $stanje->statusi_rada_id = $status;
-            $stanje->save();
+            $stanje =  StanjeRada::find($request->id);
+
+            $data = new StanjeRada();
+            $data->rad_id = $stanje->rad_id;
+            $data->statusi_rada_id = $status;
+            $data->save();
 
             //Pomocu geta kada vraca listu podataka
            
@@ -82,11 +82,14 @@ class RezervacijaRadaOdlucivanjeController extends Controller
             
         }
 
-        if($status == 3){
+        if($status == 2){ // prihvacen 
 
-            $stanje = StanjeRada::find($request->id);
-            $stanje->statusi_rada_id = $status;
-            $stanje->save();
+            $stanje =  StanjeRada::find($request->id);
+
+            $data = new StanjeRada();
+            $data->rad_id = $stanje->rad_id;
+            $data->statusi_rada_id = $status;
+            $data->save();
 
             return response()->json([
                 'success'=>true,

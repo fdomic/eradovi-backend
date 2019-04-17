@@ -23,16 +23,47 @@ class RezervacijaRadaController extends Controller
 
     public function show($id)
      {     
-          $model = PonudenaTema::find($id);
+        $model = Rad::find($id);
+          
   
-          if($model == null){
-            return response()->json([
-                'success'=>false,
-                'error' => 201,
-                'errorMsg' => 'Ovaj rad ne postoji'
-            ]);
+        if($model == null){
+          return response()->json([
+              'success'=>false,
+              'error' => 201,
+              'errorMsg' => 'Ovaj rad ne postoji'
+          ]);
 
-          }
+        }
+        
+        if($user->isReferada() == true) {
+
+            // Referada moze odluciti 
+           
+        
+       
+        } 
+        elseif($user->isProfesor() == true) {
+            
+             // Profesor moze odluciti
+
+             
+        } 
+        elseif($user->isStudent() == true) {
+
+             // Student ceka odluku on nemoze odluciti
+
+             return bad_request_response("Error - kriva korisnička grupa");
+ 
+        } 
+        else {
+            return bad_request_response("Error - kriva korisnička grupa");
+        }
+
+        return success_response($data);
+
+
+
+       
 
         if(isset($id) ) {
 

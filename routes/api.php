@@ -13,14 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-
-
 //Token
 Route::post('login', 'APILoginController@login');
 
 Route::group([ 'middleware' => ['jwt.auth'] ], function() {
 
-    
+       
 Route::resource('user',         'KorisnikController');
 Route::get('user/{id}',         'KorisnikController@show');
 
@@ -31,7 +29,7 @@ Route::get('fakultet/{id}',   'FakultetController@show');
 //Odjel
 Route::resource('odjel',            'OdjelController');
 Route::get('odjel/{id}',   'OdjelController@show');
-
+ 
 //Odjel djelatnika
 Route::resource('odijel-djelatnik', 'OdjelDjelatnikaController');
 Route::get('odijel-djelatnik/{id}',   'OdjelDjelatnikaController@show');

@@ -25,6 +25,7 @@ class CreateDjelatnikTable extends Migration
            
             $table->timestamps();
         });
+
     }
 
     /**
