@@ -92,6 +92,7 @@ class RadController extends Controller
                 $StanjeRada = new StanjeRada();
                
                 $StanjeRada->rad_id = $model['id'];
+                $StanjeRada->djelatnik_id = $korisnik->id;
                 $StanjeRada->fill($data['stanje_rada']);
                 $StanjeRada->save();
               
@@ -121,6 +122,7 @@ class RadController extends Controller
                 
                 $StanjeRada = new StanjeRada();
                 $StanjeRada->rad_id = $model['id'];
+                $StanjeRada->djelatnik_id = $korisnik->id;
                 $StanjeRada->fill($data['stanje_rada']);
                 $StanjeRada->save();
               
@@ -150,6 +152,7 @@ class RadController extends Controller
                
                $StanjeRada = new StanjeRada();
                $StanjeRada->rad_id = $model['id'];
+               $StanjeRada->student_id = $podatak->id;
                $StanjeRada->fill($data['stanje_rada']);
                $StanjeRada->save();
              

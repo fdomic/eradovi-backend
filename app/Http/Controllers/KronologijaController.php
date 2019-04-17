@@ -32,6 +32,8 @@ class KronologijaController extends Controller
             ->get();
         foreach ($verzije as $verzija) {
             $zapis = Array(
+                "djelatnik_id" => $verzija->djelatnik_id,
+                "student_id" => $verzija->student_id,
                 "labela" => $verzija->naziv,
                 "datum" => $verzija->datum
             );
@@ -51,6 +53,8 @@ class KronologijaController extends Controller
                     ->get();
         foreach ($verzije as $verzija) {
             $zapis = Array(
+                "djelatnik_id" => $verzija->djelatnik_id,
+                "student_id" => $verzija->student_id,
                 "labela" => $verzija->naziv,
                 "datum" => $verzija->datum
             );
@@ -66,8 +70,12 @@ class KronologijaController extends Controller
             ->leftJoin('komentari', 'radovi.id', '=', 'komentari.rad_id')
             ->where('radovi.id', "=", $id)
             ->get();
+
+
         foreach ($verzije as $verzija) {
             $zapis = Array(
+                "djelatnik_id" => $verzija->djelatnik_id,
+                "student_id" => $verzija->student_id,
                 "labela" => $verzija->komentar,
                 "datum" => $verzija->datum
             );

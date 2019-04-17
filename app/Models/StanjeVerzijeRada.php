@@ -11,6 +11,6 @@ class StanjeVerzijeRada extends Model
   
     protected $guarded = ['id'];
 
-    protected $fillable = ['verzija_rada_id','status_verzije_id','datum'];
+    protected $fillable = ['verzija_rada_id','student_id','djelatnik_id','status_verzije_id','datum'];
 
 }

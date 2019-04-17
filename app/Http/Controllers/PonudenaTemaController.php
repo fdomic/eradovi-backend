@@ -86,8 +86,6 @@ class PonudenaTemaController extends Controller
                 $model->save();    
             }
 
-           
-
         } 
         else 
         if($user->isProfesor() == true) {

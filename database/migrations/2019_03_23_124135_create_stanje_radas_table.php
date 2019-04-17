@@ -17,6 +17,9 @@ class CreateStanjeRadasTable extends Migration
         Schema::create('stanje_rada', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->unsignedBigInteger('student_id')->nullable();
+            $table->unsignedBigInteger('djelatnik_id')->nullable();
+
             $table->unsignedBigInteger('rad_id');
             $table->foreign('rad_id')->references('id')->on('radovi');
 

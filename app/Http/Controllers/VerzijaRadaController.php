@@ -24,7 +24,7 @@ class VerzijaRadaController extends Controller
     public function postImage(Request $request)
     {
         
-
+        $user = Auth::user();
         $id = $request->id;
         $rad = Rad::find($id);
 
@@ -97,6 +97,7 @@ class VerzijaRadaController extends Controller
         
         $stanje = new StanjeVerzijeRada();
         $stanje->verzija_rada_id = $model['id'];
+        $stanje->djelatnik_id = $user->id;
         $stanje->status_verzije_id = $request['status_verzije_id'];
         $stanje->save();
 

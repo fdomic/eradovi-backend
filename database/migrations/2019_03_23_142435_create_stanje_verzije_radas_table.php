@@ -16,7 +16,10 @@ class CreateStanjeVerzijeRadasTable extends Migration
     {
         Schema::create('stanje_verzije_rada', function (Blueprint $table) {
             $table->bigIncrements('id');
- 
+            
+            $table->unsignedBigInteger('student_id')->nullable();
+            $table->unsignedBigInteger('djelatnik_id')->nullable();
+            
             $table->unsignedBigInteger('verzija_rada_id');
             $table->foreign('verzija_rada_id')->references('id')->on('verzije_radova');
 
