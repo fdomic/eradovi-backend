@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Auth;
 use App\Models\Rad;
 use App\Models\StanjeRada;
 use App\Models\PonudenaTema;
@@ -15,10 +17,11 @@ class RezervacijaRadaOdlucivanjeController extends Controller
 
     public function store(Request $request)
     {   
+        
+        $user = Auth::user();
 
-        if($user->isProfesor() == true) {
+        
             
-            $user = Auth::user();
             $status = $request->statusi_rada_id;
             $provjera = Rad::find( $request->id);
 
@@ -59,10 +62,8 @@ class RezervacijaRadaOdlucivanjeController extends Controller
         
             if($status == 3){ //odbijen
 
-                $stanje =  StanjeRada::find($request->id);
-
                 $data = new StanjeRada();
-                $data->rad_id = $stanje->rad_id;
+                $data->rad_id = $request->id;
                 $data->djelatnik_id =  $user->id;
                 $data->statusi_rada_id = $status;
                 $data->save();
@@ -81,30 +82,28 @@ class RezervacijaRadaOdlucivanjeController extends Controller
             
                 return response()->json([
                     'success'=>true,
-                    'tema' => $stanje,
+                    'tema' => $data,
                 ]);
                 
             }
 
             if($status == 2){ // prihvacen 
 
-                $stanje =  StanjeRada::find($request->id);
-
+              
                 $data = new StanjeRada();
-                $data->rad_id = $stanje->rad_id;
+                $data->rad_id = $request->id;
                 $data->djelatnik_id = $user->id;
                 $data->statusi_rada_id = $status;
                 $data->save();
 
                 return response()->json([
                     'success'=>true,
-                    'tema' => $stanje,
+                    'tema' => $data,
                 ]);
 
             }
     
-        }
-
+        
         
     }
 }   

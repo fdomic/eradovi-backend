@@ -92,7 +92,7 @@ class RadController extends Controller
                 $StanjeRada = new StanjeRada();
                
                 $StanjeRada->rad_id = $model['id'];
-                $StanjeRada->djelatnik_id = $korisnik->id;
+                $StanjeRada->djelatnik_id = $user->id;
                 $StanjeRada->fill($data['stanje_rada']);
                 $StanjeRada->save();
               
