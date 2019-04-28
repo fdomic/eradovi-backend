@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Models\PonudenaTema;
 use App\Models\Rad;
 use App\Models\StanjeRada;
@@ -24,7 +24,7 @@ class RezervacijaRadaController extends Controller
     public function show($id)
      {     
         $model = PonudenaTema::find($id);
-          
+        $user = Auth::user();
   
         if($model == null){
           return response()->json([
@@ -115,7 +115,7 @@ class RezervacijaRadaController extends Controller
             return bad_request_response("Error - kriva korisnička grupa");
         }
 
-        return success_response($data);
+        return success_response($model);
 
     }
 }

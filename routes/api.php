@@ -13,38 +13,41 @@ use Illuminate\Http\Request;
 |
 */
 
+    //Token
+    Route::post('login', 'APILoginController@login');
 
+    Route::group([ 'middleware' => ['jwt.auth'] ], function() {
 
-//Token
-Route::post('login', 'APILoginController@login');
+        
+    Route::resource('user',         'KorisnikController');
+    Route::get('user/{id}',         'KorisnikController@show');
 
-Route::group([ 'middleware' => ['jwt.auth'] ], function() {
+    //Fakultet
+    Route::resource('fakultet',         'FakultetController');
+    Route::get('fakultet/{id}',   'FakultetController@show');
 
+    //Odjel
+    Route::resource('odjel',            'OdjelController');
+    Route::get('odjel/{id}',   'OdjelController@show');
     
+    //Odjel djelatnika
+    Route::resource('odijel-djelatnik', 'OdjelDjelatnikaController');
+    Route::get('odijel-djelatnik/{id}',   'OdjelDjelatnikaController@show');
 
-       
-Route::resource('user',         'KorisnikController');
-Route::get('user/{id}',         'KorisnikController@show');
+    //Student
+    Route::resource('student',          'StudentController');
+    Route::get('student/{id}',   'StudentController@show');
 
-//Fakultet
-Route::resource('fakultet',         'FakultetController');
-Route::get('fakultet/{id}',   'FakultetController@show');
+    //Djelatnik
+    Route::resource('dijelatnik',       'DjelatnikController');
+    Route::get('dijelatnik/{id}',   'DjelatnikController@show');
 
-//Odjel
-Route::resource('odjel',            'OdjelController');
-Route::get('odjel/{id}',   'OdjelController@show');
- 
-//Odjel djelatnika
-Route::resource('odijel-djelatnik', 'OdjelDjelatnikaController');
-Route::get('odijel-djelatnik/{id}',   'OdjelDjelatnikaController@show');
 
-//Student
-Route::resource('student',          'StudentController');
-Route::get('student/{id}',   'StudentController@show');
+    //Ucitavanje datoteke:
+    Route::post    ('ucitaj/{id}',      'VerzijaRadaController@postImage');
+    Route::resource('vrati',         'VerzijaRadaController');
 
-//Djelatnik
-Route::resource('dijelatnik',       'DjelatnikController');
-Route::get('dijelatnik/{id}',   'DjelatnikController@show');
+
 
     //Rad
     Route::resource('rad',              'RadController');

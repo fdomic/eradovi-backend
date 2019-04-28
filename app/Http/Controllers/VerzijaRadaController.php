@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Models\VerzijaRada;
 use App\Models\Rad;       
 use App\Models\StanjeVerzijeRada;

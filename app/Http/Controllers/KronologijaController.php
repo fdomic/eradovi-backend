@@ -12,6 +12,7 @@ use App\Models\StatusVerzija;
 use App\Models\Rad;
 use App\Models\StanjeRada;
 use App\Models\StatusRada;
+use App\Models\VerzijaRadaController;
 
 
 use Illuminate\Http\Request;
@@ -86,6 +87,29 @@ class KronologijaController extends Controller
         }
 
 //---------------------------------------------------------------------------------------------------------------
+
+//------ Ispis iz Komentara (Komenatari na rada)--------------------------------------------------------------------------
+                     
+        $verzije = DB::table('verzije_radova')
+        ->where('verzije_radova.rad_id', "=", $id)
+        ->get();
+
+
+        foreach ($verzije as $verzija) {
+        $zapis = Array(
+            "datoteka_ime" => $verzija->datoteka_ime,
+            "datoteka" => $verzija->datoteka,
+            "verzija_predanog_rada" => $verzija->verzija_predanog_rada,
+            "datum" => $verzija->datum_predaje
+        );
+
+        if($verzija->datum_predaje != null){
+            array_push($data, $zapis);
+        }
+        }
+
+//---------------------------------------------------------------------------------------------------------------
+
 
 //-------Sortiranje po datumu---------------------------------------------------------------------------------------------------
         
