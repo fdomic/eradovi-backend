@@ -88,7 +88,7 @@ class KronologijaController extends Controller
 
 //---------------------------------------------------------------------------------------------------------------
 
-//------ Ispis iz Komentara (Komenatari na rada)--------------------------------------------------------------------------
+//------ Ispis iz Rad datoteka (Komenatari na rada)--------------------------------------------------------------------------
                      
         $verzije = DB::table('verzije_radova')
         ->where('verzije_radova.rad_id', "=", $id)
@@ -97,6 +97,7 @@ class KronologijaController extends Controller
 
         foreach ($verzije as $verzija) {
         $zapis = Array(
+            "labela" => NULL,
             "datoteka_ime" => $verzija->datoteka_ime,
             "datoteka" => $verzija->datoteka,
             "verzija_predanog_rada" => $verzija->verzija_predanog_rada,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Auth;
+use Carbon\Carbon;
 use App\Models\VerzijaRada;
 use App\Models\Rad;       
 use App\Models\StanjeVerzijeRada;
@@ -92,8 +93,11 @@ class VerzijaRadaController extends Controller
         $model->rad_id = $rad->id;
         $model->datoteka_ime = $imageName;
         $model->datoteka = $hostname . "/" .   $destinationPath;
+        $model->datum_predaje = Carbon::now();
         $model->verzija_predanog_rada = $brojTrenutnihVerzija + 1;
         $model->save();
+
+       
         
         $stanje = new StanjeVerzijeRada();
         $stanje->verzija_rada_id = $model['id'];
