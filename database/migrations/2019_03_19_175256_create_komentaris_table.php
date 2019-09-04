@@ -22,7 +22,7 @@ class CreateKomentarisTable extends Migration
             $table->unsignedBigInteger('student_id')->nullable();
             $table->unsignedBigInteger('djelatnik_id')->nullable();
             $table->string('komentar');
-            $table->date('datum');
+            $table->datetime('datum');
 
             $table->timestamps();
         });

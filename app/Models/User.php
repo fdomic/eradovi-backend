@@ -35,7 +35,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-         'remember_token',
+        'password', 'remember_token'
     ];
 
     /**
@@ -55,34 +55,13 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function isReferada() {
-        $djelatnik = Djelatnik::where('korisnik_id', '=', $this->id)->first('id');
-        
-        if($djelatnik == null) return false;
-        
-        $djelatnik = OdijelDjelatnika::where('djelatnik_id', '=', $djelatnik->id,'AND','naziv','=','Referada')->first('naziv');
-
-        return $djelatnik != null;
-    }
-    
-    public function isStudent() {
+    public function getStudentOrProfesor() {
         $korisnik = Student::where('korisnik_id', '=', $this->id )->first('id');
-
-        return $korisnik != null;
+        if($korisnik == null) {
+            $korisnik = Djelatnik::where('korisnik_id', '=', $this->id)->first('id');
+        }
+        return $korisnik;
     }
-    
-    public function isProfesor() {
-        $djelatnik = Djelatnik::where('korisnik_id', '=', $this->id)->first('id');
-
-        if($djelatnik == null) return false;
-        
-        $djelatnik = OdijelDjelatnika::where('djelatnik_id', '=', $djelatnik->id,'AND','naziv','!=','Referada')->first('naziv');
-
-        return $djelatnik != null;
-    }
-    
-    
-
     
 }
 

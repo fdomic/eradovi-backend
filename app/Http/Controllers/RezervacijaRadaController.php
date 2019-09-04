@@ -24,7 +24,7 @@ class RezervacijaRadaController extends Controller
     public function show($id)
      {     
         $model = PonudenaTema::find($id);
-        $user = Auth::user();
+        $user = Auth::user()->getStudentOrProfesor();
   
         if($model == null){
           return response()->json([

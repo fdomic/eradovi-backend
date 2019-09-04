@@ -15,8 +15,7 @@ class RadController extends Controller
     public function index()
     {
         $data = null;
-        $podatak = null;
-        $user = Auth::user();
+        $user = Auth::user()->getStudentOrProfesor();
 
         if($user->isReferada()) {
 
@@ -25,14 +24,12 @@ class RadController extends Controller
         } 
         elseif($user->isProfesor() == true) {
            
-            $djelatnik = Djelatnik::where('korisnik_id', '=', $user->id)->first('id');
-            $data = Rad::where('djelatnik_id', '=', $djelatnik->id)->get();
+            $data = Rad::where('djelatnik_id', '=', $user->id)->get();
    
         } 
         elseif($user->isStudent() == true) {
 
-            $korisnik = Student::where('korisnik_id', '=', $user->id )->first('id');
-            $data = Rad::where('student_id', '=',$korisnik->id )->get();
+            $data = Rad::where('student_id', '=', $user->id )->get();
             
         } 
         else {
@@ -62,17 +59,12 @@ class RadController extends Controller
 
         $data = $request->all();
         $model = null;
-        $podatak = null;
-        $user = Auth::user();
-
-        
+        $user = Auth::user()->getStudentOrProfesor();
 
         if($user->isReferada() == true) {
 
             // Referada ona moze upisati rad za bilo kojeg profesora i studenta
            
-            
-
             if(isset($data['id'])) {
                 //UPDATE
        
@@ -102,8 +94,6 @@ class RadController extends Controller
         elseif($user->isProfesor() == true) {
             
              // Profesor moze upisati rad za bilo kojeg studenta, ali samo na svoj id
-
-             $podatak = Djelatnik::where('korisnik_id', '=', $user->id )->first('id');
         
              if(isset($data['id'])) {
                 //UPDATE
@@ -116,13 +106,13 @@ class RadController extends Controller
                 //CREATE
        
                 $model = new Rad();
-                $model->djelatnik_id = $korisnik->id;
+                $model->djelatnik_id = $user->id;
                 $model->fill($data);
                 $model->save();
                 
                 $StanjeRada = new StanjeRada();
                 $StanjeRada->rad_id = $model['id'];
-                $StanjeRada->djelatnik_id = $korisnik->id;
+                $StanjeRada->djelatnik_id = $user->id;
                 $StanjeRada->fill($data['stanje_rada']);
                 $StanjeRada->save();
               
@@ -132,8 +122,6 @@ class RadController extends Controller
         elseif($user->isStudent() == true) {
 
              // Student moze upisati rad za bilo kojeg profesora, ali samo na svoj id
-
-            $podatak = Student::where('korisnik_id', '=', $user->id )->first('id');
 
             if(isset($data['id'])) {
                //UPDATE
@@ -146,13 +134,13 @@ class RadController extends Controller
                //CREATE
       
                $model = new Rad();
-               $model->student_id = $podatak->id;
+               $model->student_id = $user->id;
                $model->fill($data);
                $model->save();
                
                $StanjeRada = new StanjeRada();
                $StanjeRada->rad_id = $model['id'];
-               $StanjeRada->student_id = $podatak->id;
+               $StanjeRada->student_id = $user->id;
                $StanjeRada->fill($data['stanje_rada']);
                $StanjeRada->save();
              

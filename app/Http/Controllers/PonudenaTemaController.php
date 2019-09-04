@@ -19,7 +19,7 @@ class PonudenaTemaController extends Controller
         $data = null;
 
         $podatak = null;
-        $user = Auth::user();
+        $user = Auth::user()->getStudentOrProfesor();
         
 
        if($user->isStudent() == true) {
@@ -65,7 +65,7 @@ class PonudenaTemaController extends Controller
         $data = $request->all();
         $model = null;
         $podatak = null;
-        $user = Auth::user();
+        $user = Auth::user()->getStudentOrProfesor();
 
         if($user->isReferada() == true) {
 
@@ -90,9 +90,7 @@ class PonudenaTemaController extends Controller
         else 
         if($user->isProfesor() == true) {
             
-             // Profesor moze upisati ponudenu temu samo za sebe   
-             
-             $podatak = Djelatnik::where('korisnik_id', '=', $user->id )->first('id');
+             // Profesor moze upisati ponudenu temu samo za sebe  
             
              $data = $request->all();
              $model = null;
@@ -105,7 +103,7 @@ class PonudenaTemaController extends Controller
              } else {
                  //CREATE
                  $model = new PonudenaTema();
-                 $model->korisnik_id = $podatak->id;
+                 $model->djelatnik_id = $user->id;
                  $model->fill($data);
                  $model->save();       
              }

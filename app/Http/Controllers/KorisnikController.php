@@ -22,7 +22,7 @@ class KorisnikController extends Controller
     
     public function show($id)
     {
-        $data = User::v;
+        $data = User::find($id);
         return response()->json([
             'success' => true,
             'data' => $data 

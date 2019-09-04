@@ -35,7 +35,7 @@ class KomentarController extends Controller
         $data = $request->all();
         $model = null;
         $podatak = null;
-        $user = Auth::user();
+        $user = Auth::user()->getStudentOrProfesor();
 
 
 

@@ -25,7 +25,7 @@ class VerzijaRadaController extends Controller
     public function postImage(Request $request)
     {
         
-        $user = Auth::user();
+        $user = Auth::user()->getStudentOrProfesor();
         $id = $request->id;
         $rad = Rad::find($id);
 
@@ -96,12 +96,11 @@ class VerzijaRadaController extends Controller
         $model->datum_predaje = Carbon::now();
         $model->verzija_predanog_rada = $brojTrenutnihVerzija + 1;
         $model->save();
-
-       
         
         $stanje = new StanjeVerzijeRada();
         $stanje->verzija_rada_id = $model['id'];
-        $stanje->djelatnik_id = $user->id;
+        if($user->isStudent()) $stanje->student_id = $user->id;
+        else $stanje->djelatnik_id = $user->id;
         $stanje->status_verzije_id = $request['status_verzije_id'];
         $stanje->save();
 
